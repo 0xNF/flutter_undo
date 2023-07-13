@@ -1,5 +1,6 @@
 import 'package:flutter_undo/src/command/command.dart';
-import 'package:flutter_undo/src/command/commandHistory.dart';
+import 'package:flutter_undo/src/command/command_history.dart';
+import 'package:flutter_undo/src/logger.dart';
 
 class UndoStack {
   /// Maximium amount of elements allowed to be in the history stack
@@ -37,9 +38,11 @@ class UndoStack {
   ///
   /// Adding to the stack does not imply an execution -- you are responsible for calling `execute()` on your own, either before or after adding to the stack
   void pushCommand(ICommand command) {
+    logger.info("pushing command to undo stack");
     final CommandHistory ch = CommandHistory(command: command);
     /* Push the command to the stack, removing the least recent command if stack is too big */
     if (_stack.length == maxStackSize) {
+      logger.trace("undo stack size exceeded, removing lru entry");
       _stack.removeAt(maxStackSize - 1);
     }
     if (stackPointer > 0) {
@@ -47,6 +50,7 @@ class UndoStack {
       * In response, we must eliminate everything in the stack before the pointer: the state can no longer be consistent if we keep those commands around
       * fyi(nf, 22/6/19): UndoTrees can be implemented at this stage in the future, if required
       */
+      logger.trace("undo stack rewound and then appended to. Invalidating all future saved sates");
       _stack.removeRange(0, stackPointer);
     }
     _stack.insert(0, ch);
@@ -68,6 +72,8 @@ class UndoStack {
     if (ch == null) {
       return null;
     }
+
+    logger.info("Undoing command");
 
     /* move the stackPointer up by one to represent a pop */
     stackPointer += 1;
@@ -95,6 +101,7 @@ class UndoStack {
     }
 
     if (ch.command.canExecute()) {
+      logger.info("Redoing command");
       /* move the stackPointer down by one to represent a push */
       stackPointer -= 1;
       ch.command.execute();
@@ -138,6 +145,7 @@ class UndoStack {
 
   /// Empties the current history. This action is not undoable.
   void clearHistory() {
+    logger.debug("Clearing undo stack");
     _stack.clear();
     stackPointer = 0;
   }

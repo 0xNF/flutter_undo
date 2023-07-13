@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_undo/src/command/command.dart';
-import 'package:flutter_undo/src/command/commandHistory.dart';
+import 'package:flutter_undo/src/command/command_history.dart';
 import 'package:flutter_undo/src/undo/undo_stack.dart';
 
 /// Widget allowing an [UndoStack] to be applied to all children elements
@@ -8,7 +8,7 @@ import 'package:flutter_undo/src/undo/undo_stack.dart';
 /// Access the undo stack from children via `InheritedUndo.of(context).undoStack`
 class InheritedUndo extends InheritedWidget {
   final UndoStack undoStack = UndoStack();
-  InheritedUndo({Key? key, required Widget child}) : super(key: key, child: child);
+  InheritedUndo({super.key, required super.child});
 
   @override
   bool updateShouldNotify(InheritedUndo oldWidget) {

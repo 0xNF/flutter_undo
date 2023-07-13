@@ -3,7 +3,7 @@ import 'package:flutter_undo/src/command/basic_command.dart';
 import 'package:flutter_undo/src/undo/inherited_undo_stack.dart';
 
 class UndoView extends StatefulWidget {
-  const UndoView({Key? key}) : super(key: key);
+  const UndoView({super.key});
   static const String routeName = "UndoTest";
 
   @override
