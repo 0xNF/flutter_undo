@@ -12,9 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  ilogger:
-    git:
-      url: https://github.com/0xNF/dart_ilogger
+  ilogger: ^0.1.0
 
 dev_dependencies:
   flutter_test:
