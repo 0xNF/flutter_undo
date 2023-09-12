@@ -24,7 +24,8 @@ class InheritedUndo extends InheritedWidget {
   }
 
   static InheritedUndo of(BuildContext context) {
-    final InheritedUndo? result = context.dependOnInheritedWidgetOfExactType<InheritedUndo>();
+    final InheritedUndo? result =
+        context.dependOnInheritedWidgetOfExactType<InheritedUndo>();
     assert(result != null, 'No InheritedUndo found in context');
     return result!;
   }

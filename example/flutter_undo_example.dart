@@ -73,14 +73,18 @@ class _UndoViewState extends State<UndoView> {
           Column(
             children: [
               Text("Stack Info"),
-              Text("Stack Pointer: ${InheritedUndo.of(context).undoStack.stackPointer}"),
-              Text("Stack Length (undoable): ${InheritedUndo.of(context).undoStack.stackSize}"),
+              Text(
+                  "Stack Pointer: ${InheritedUndo.of(context).undoStack.stackPointer}"),
+              Text(
+                  "Stack Length (undoable): ${InheritedUndo.of(context).undoStack.stackSize}"),
               Text("Can Undo: ${InheritedUndo.of(context).undoStack.canUndo}"),
               Text("Can Redo: ${InheritedUndo.of(context).undoStack.canRedo}"),
               Row(
                 children: [
                   Text("["),
-                  for (final c in InheritedUndo.of(context).undoStack.listCommands()) Text("${c.command.commandName}, "),
+                  for (final c
+                      in InheritedUndo.of(context).undoStack.listCommands())
+                    Text("${c.command.commandName}, "),
                   Text("]"),
                 ],
               )
