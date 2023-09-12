@@ -2,6 +2,8 @@ name: flutter_undo
 description: Provided Undo/Redo functionality
 version: 0.0.1
 homepage: https://github.com/0xnf/flutter_undo
+repository: https://github.com/0xnf/flutter_undo
+
 publish_to: none
 
 environment:

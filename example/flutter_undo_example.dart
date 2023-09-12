@@ -17,7 +17,6 @@ class _UndoViewState extends State<UndoView> {
   @override
   void initState() {
     super.initState();
-    print("Some test text here");
   }
 
   void undo() {
@@ -54,38 +53,41 @@ class _UndoViewState extends State<UndoView> {
 
   @override
   Widget build(BuildContext context) {
-    return (Column(
-      children: [
-        Row(
-          children: [
-            ElevatedButton(onPressed: undo, child: Text("Undo")),
-            ElevatedButton(onPressed: redo, child: Text("Redo")),
-            ElevatedButton(onPressed: add, child: Text("+")),
-            ElevatedButton(onPressed: reset, child: Text("reset")),
-          ],
-        ),
-        Row(
-          children: [
-            for (final val in values) Text("$val "),
-          ],
-        ),
-        Column(
-          children: [
-            Text("Stack Info"),
-            Text("Stack Pointer: ${InheritedUndo.of(context).undoStack.stackPointer}"),
-            Text("Stack Length (undoable): ${InheritedUndo.of(context).undoStack.stackSize}"),
-            Text("Can Undo: ${InheritedUndo.of(context).undoStack.canUndo}"),
-            Text("Can Redo: ${InheritedUndo.of(context).undoStack.canRedo}"),
-            Row(
-              children: [
-                Text("["),
-                for (final c in InheritedUndo.of(context).undoStack.listCommands()) Text("${c.command.commandName}, "),
-                Text("]"),
-              ],
-            )
-          ],
-        ),
-      ],
-    ));
+    return InheritedUndo(
+      key: const Key('InheritedUndoSample'),
+      child: (Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(onPressed: undo, child: Text("Undo")),
+              ElevatedButton(onPressed: redo, child: Text("Redo")),
+              ElevatedButton(onPressed: add, child: Text("+")),
+              ElevatedButton(onPressed: reset, child: Text("reset")),
+            ],
+          ),
+          Row(
+            children: [
+              for (final val in values) Text("$val "),
+            ],
+          ),
+          Column(
+            children: [
+              Text("Stack Info"),
+              Text("Stack Pointer: ${InheritedUndo.of(context).undoStack.stackPointer}"),
+              Text("Stack Length (undoable): ${InheritedUndo.of(context).undoStack.stackSize}"),
+              Text("Can Undo: ${InheritedUndo.of(context).undoStack.canUndo}"),
+              Text("Can Redo: ${InheritedUndo.of(context).undoStack.canRedo}"),
+              Row(
+                children: [
+                  Text("["),
+                  for (final c in InheritedUndo.of(context).undoStack.listCommands()) Text("${c.command.commandName}, "),
+                  Text("]"),
+                ],
+              )
+            ],
+          ),
+        ],
+      )),
+    );
   }
 }
