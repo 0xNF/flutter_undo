@@ -1,4 +1,4 @@
-import 'package:flutter_undo/src/command/command.dart';
+import 'package:nf_flutter_undo/src/command/command.dart';
 
 /// Records a command, along with the time of execution
 class CommandHistory {

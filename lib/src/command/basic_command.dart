@@ -1,4 +1,4 @@
-import 'package:flutter_undo/src/command/command.dart';
+import 'package:nf_flutter_undo/src/command/command.dart';
 
 /// A basic implementation of the [ICommand] interface
 class BasicCommand extends ICommand {

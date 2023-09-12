@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_undo/src/command/command.dart';
-import 'package:flutter_undo/src/command/command_history.dart';
-import 'package:flutter_undo/src/undo/undo_stack.dart';
+import 'package:nf_flutter_undo/src/command/command.dart';
+import 'package:nf_flutter_undo/src/command/command_history.dart';
+import 'package:nf_flutter_undo/src/undo/undo_stack.dart';
 
 /// Widget allowing an [UndoStack] to be applied to all children elements
 ///
@@ -24,8 +24,7 @@ class InheritedUndo extends InheritedWidget {
   }
 
   static InheritedUndo of(BuildContext context) {
-    final InheritedUndo? result =
-        context.dependOnInheritedWidgetOfExactType<InheritedUndo>();
+    final InheritedUndo? result = context.dependOnInheritedWidgetOfExactType<InheritedUndo>();
     assert(result != null, 'No InheritedUndo found in context');
     return result!;
   }

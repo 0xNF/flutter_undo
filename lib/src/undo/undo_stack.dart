@@ -1,6 +1,6 @@
-import 'package:flutter_undo/src/command/command.dart';
-import 'package:flutter_undo/src/command/command_history.dart';
-import 'package:flutter_undo/src/logger.dart';
+import 'package:nf_flutter_undo/src/command/command.dart';
+import 'package:nf_flutter_undo/src/command/command_history.dart';
+import 'package:nf_flutter_undo/src/logger.dart';
 
 class UndoStack {
   /// Maximium amount of elements allowed to be in the history stack
@@ -30,12 +30,9 @@ class UndoStack {
   int get stackSize => _stack.length - stackPointer;
 
   bool get canUndo => stackPointer > -1 && stackPointer < _stack.length;
-  bool get canRedo =>
-      stackPointer >
-      0; /* -1 (empty) and 0 (no future objects) mean cannot go forwards */
+  bool get canRedo => stackPointer > 0; /* -1 (empty) and 0 (no future objects) mean cannot go forwards */
 
-  UndoStack({this.maxStackSize = 64})
-      : assert(maxStackSize > 0, "stackSize must be a positive integer > 0");
+  UndoStack({this.maxStackSize = 64}) : assert(maxStackSize > 0, "stackSize must be a positive integer > 0");
 
   /// Adds this command to the stack. The time of execution is recorded within the command.
   ///
@@ -53,8 +50,7 @@ class UndoStack {
       * In response, we must eliminate everything in the stack before the pointer: the state can no longer be consistent if we keep those commands around
       * fyi(nf, 22/6/19): UndoTrees can be implemented at this stage in the future, if required
       */
-      logger.trace(
-          "undo stack rewound and then appended to. Invalidating all future saved sates");
+      logger.trace("undo stack rewound and then appended to. Invalidating all future saved sates");
       _stack.removeRange(0, stackPointer);
     }
     _stack.insert(0, ch);
